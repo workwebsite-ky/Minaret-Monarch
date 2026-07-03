@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minaret Monarch — Where Faith Meets Grace</title>
+  <meta name="description" content="Minaret Monarch is a premier Islamic center offering prayer services, Islamic education, community programs, and spiritual guidance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --emerald:    #0d4f3c;
+      --emerald-mid:#1a6b52;
+      --emerald-lt: #2a8a6a;
+      --gold:       #c9a84c;
+      --gold-lt:    #e8c97a;
+      --ivory:      #f8f3e8;
+      --ivory-dk:   #ede4d0;
+      --charcoal:   #1c1c1c;
+      --white:      #ffffff;
+      --text-muted: #6b6b6b;
+      --font-display: 'Cinzel', serif;
+      --font-body:    'Cormorant Garamond', serif;
+      --font-sans:    'Lato', sans-serif;
+      --trans: 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+      --shadow-deep: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);background:var(--ivory);color:var(--charcoal);overflow-x:hidden}
+    img{max-width:100%;display:block;object-fit:cover}
+    a{text-decoration:none;color:inherit}
+    ul{list-style:none}
+    button{cursor:pointer;font-family:inherit;border:none;outline:none}
+
+    /* ── LOADER ── */
+    #loader{position:fixed;inset:0;z-index:9999;background:var(--emerald);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s,visibility .8s}
+    #loader.hidden{opacity:0;visibility:hidden}
+    .loader-ring{width:80px;height:80px;border:3px solid rgba(201,168,76,.3);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px}
+    .loader-name{font-family:var(--font-display);color:var(--gold);font-size:1rem;letter-spacing:.3em;text-transform:uppercase}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ── NAVBAR ── */
+    #navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:76px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,79,60,0.96);backdrop-filter:blur(16px);box-shadow:0 2px 20px rgba(0,0,0,.25);transition:height var(--trans)}
+    #navbar.shrink{height:62px}
+    .nav-logo-wrap{display:flex;flex-direction:column;line-height:1.1}
+    .nav-logo-main{font-family:var(--font-display);font-size:1.3rem;font-weight:600;color:var(--gold);letter-spacing:.06em}
+    .nav-logo-sub{font-family:var(--font-sans);font-size:.58rem;letter-spacing:.28em;color:rgba(201,168,76,.55);text-transform:uppercase;margin-top:2px}
+    .nav-links{display:flex;gap:32px;align-items:center}
+    .nav-links a{font-family:var(--font-sans);font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.8);position:relative;padding-bottom:4px;transition:color var(--trans)}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width var(--trans)}
+    .nav-links a:hover,.nav-links a.active{color:var(--gold)}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-cta-btn{background:var(--gold)!important;color:var(--emerald)!important;padding:9px 22px!important;border-radius:2px!important;font-weight:700!important}
+    .nav-cta-btn:hover{background:var(--gold-lt)!important;transform:translateY(-1px);box-shadow:0 6px 18px rgba(201,168,76,.4)!important}
+    .nav-cta-btn::after{display:none!important}
+
+    /* hamburger */
+    .hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+    .hbg span{width:24px;height:2px;background:var(--gold);border-radius:2px;transition:all .3s}
+    .hbg.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .hbg.open span:nth-child(2){opacity:0}
+    .hbg.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .mob-menu{position:fixed;top:0;right:-100%;width:270px;height:100vh;background:var(--emerald);z-index:999;padding:90px 36px 36px;display:flex;flex-direction:column;gap:6px;transition:right .4s;box-shadow:-8px 0 30px rgba(0,0,0,.4)}
+    .mob-menu.open{right:0}
+    .mob-menu a{font-family:var(--font-sans);font-size:.85rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.75);padding:13px 0;border-bottom:1px solid rgba(201,168,76,.12);transition:color .3s}
+    .mob-menu a:hover{color:var(--gold)}
+    .mob-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:998;opacity:0;pointer-events:none;transition:opacity .3s}
+    .mob-overlay.show{opacity:1;pointer-events:all}
+
+    /* ── PAGES ── */
+    .page{display:none}
+    .page.active{display:block}
+
+    /* ── SHARED COMPONENTS ── */
+    .container{max-width:1180px;margin:0 auto;padding:0 48px}
+    .tag{font-family:var(--font-sans);font-size:.68rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .tag::after{content:'';flex:1;max-width:36px;height:1px;background:var(--gold)}
+    .section-title{font-family:var(--font-display);font-size:clamp(2rem,3.8vw,3rem);font-weight:600;line-height:1.15;color:var(--charcoal)}
+    .section-title.light{color:var(--white)}
+    .divider{width:54px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:18px 0}
+    .sub{font-family:var(--font-body);font-size:1.15rem;color:var(--text-muted);line-height:1.8;max-width:580px}
+
+    .btn-gold{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--emerald);font-family:var(--font-sans);font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:15px 34px;border-radius:2px;border:none;transition:all var(--trans)}
+    .btn-gold:hover{background:var(--gold-lt);transform:translateY(-3px);box-shadow:0 10px 28px rgba(201,168,76,.4)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--white);font-family:var(--font-sans);font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:14px 34px;border-radius:2px;border:1.5px solid rgba(255,255,255,.35);transition:all var(--trans)}
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+    .btn-green{display:inline-flex;align-items:center;gap:10px;background:var(--emerald);color:var(--white);font-family:var(--font-sans);font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:15px 34px;border-radius:2px;border:none;transition:all var(--trans)}
+    .btn-green:hover{background:var(--emerald-lt);transform:translateY(-3px);box-shadow:0 10px 28px rgba(13,79,60,.35)}
+
+    /* scroll reveal */
+    .r{opacity:0;transform:translateY(36px);transition:opacity .8s,transform .8s}
+    .r.v{opacity:1;transform:none}
+    .rl{opacity:0;transform:translateX(-36px);transition:opacity .8s,transform .8s}
+    .rl.v{opacity:1;transform:none}
+    .rr{opacity:0;transform:translateX(36px);transition:opacity .8s,transform .8s}
+    .rr.v{opacity:1;transform:none}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;background:linear-gradient(150deg,#0a3d2e 0%,#061f18 100%)}
+    .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.15}
+    .hero-geo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .hero-geo svg{width:100%;height:100%;opacity:.07}
+    .hero-deco{position:absolute;right:5%;top:50%;transform:translateY(-50%);opacity:.07;animation:spinSlow 50s linear infinite}
+    @keyframes spinSlow{to{transform:translateY(-50%) rotate(360deg)}}
+    .hero-inner{position:relative;z-index:2;padding:140px 48px 100px;max-width:820px}
+    .hero-bismillah{font-family:var(--font-body);font-size:2.2rem;font-style:italic;color:var(--gold);margin-bottom:22px;opacity:.9;animation:fUp .9s .2s both}
+    .hero-title{font-family:var(--font-display);font-size:clamp(2.6rem,5.5vw,5rem);font-weight:700;color:var(--white);line-height:1.08;animation:fUp .9s .4s both}
+    .hero-title span{color:var(--gold)}
+    .hero-p{font-family:var(--font-body);font-size:1.25rem;color:rgba(255,255,255,.72);margin:22px 0 40px;line-height:1.8;max-width:560px;animation:fUp .9s .6s both}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fUp .9s .8s both}
+    @keyframes fUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+    .hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.4);font-family:var(--font-sans);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;animation:bob 2s ease infinite}
+    .hero-scroll i{color:var(--gold);font-size:1.1rem}
+    @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+    /* prayer banner */
+    .prayer-bar{background:var(--emerald-mid);padding:18px 0;border-top:1px solid rgba(201,168,76,.18);border-bottom:1px solid rgba(201,168,76,.18)}
+    .prayer-bar .container{display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:12px}
+    .p-item{text-align:center}
+    .p-name{font-family:var(--font-sans);font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:3px}
+    .p-time{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--gold)}
+    .p-sep{width:1px;height:36px;background:rgba(201,168,76,.2)}
+
+    /* intro */
+    .intro{padding:110px 0;background:var(--ivory)}
+    .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+    .intro-img-wrap{position:relative}
+    .intro-img-main{width:100%;height:500px;border-radius:3px;box-shadow:var(--shadow-deep)}
+    .intro-img-badge{position:absolute;top:24px;left:-20px;width:96px;height:96px;background:var(--gold);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(201,168,76,.35)}
+    .intro-img-badge-num{font-family:var(--font-display);font-size:1.7rem;font-weight:700;color:var(--emerald);line-height:1}
+    .intro-img-badge-txt{font-family:var(--font-sans);font-size:.45rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald);text-align:center;margin-top:2px}
+    .intro-img-mini{position:absolute;bottom:-28px;right:-24px;width:180px;height:180px;border-radius:3px;border:5px solid var(--ivory);box-shadow:var(--shadow-deep)}
+    .intro-feats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
+    .intro-feat{display:flex;align-items:flex-start;gap:11px}
+    .feat-icon{width:38px;height:38px;min-width:38px;background:rgba(13,79,60,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--emerald);font-size:.85rem}
+    .feat-text strong{font-family:var(--font-sans);font-size:.75rem;font-weight:700;letter-spacing:.04em;color:var(--charcoal);display:block;margin-bottom:1px}
+    .feat-text span{font-size:.88rem;color:var(--text-muted)}
+
+    /* stats */
+    .stats{background:linear-gradient(135deg,var(--emerald),#0a3d2e);padding:72px 0;position:relative;overflow:hidden}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center}
+    .stat-n{font-family:var(--font-display);font-size:clamp(2.4rem,4vw,3.4rem);font-weight:700;color:var(--gold);display:block;line-height:1}
+    .stat-l{font-family:var(--font-sans);font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-top:9px}
+
+    /* services */
+    .services{padding:110px 0;background:var(--ivory-dk)}
+    .sec-head{text-align:center;margin-bottom:60px}
+    .sec-head .tag{justify-content:center}
+    .sec-head .tag::before{content:'';flex:1;max-width:36px;height:1px;background:var(--gold)}
+    .sec-head .divider{margin:18px auto}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+    .svc-card{background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.06);transition:all var(--trans);border-bottom:3px solid transparent}
+    .svc-card:hover{transform:translateY(-8px);box-shadow:0 18px 48px rgba(0,0,0,.12);border-bottom-color:var(--gold)}
+    .svc-img-wrap{overflow:hidden;height:210px;background:#1a6b52;display:flex;align-items:center;justify-content:center}
+    .svc-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+    .svc-card:hover .svc-img-wrap img{transform:scale(1.06)}
+    /* placeholder if image fails */
+    .svc-img-wrap .img-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(255,255,255,.5);font-family:var(--font-sans);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase}
+    .svc-img-wrap .img-fallback i{font-size:2.5rem;color:rgba(201,168,76,.5)}
+    .svc-body{padding:26px}
+    .svc-icon{width:44px;height:44px;background:rgba(13,79,60,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--emerald);font-size:1rem;margin-bottom:14px}
+    .svc-body h3{font-family:var(--font-display);font-size:1.3rem;font-weight:600;color:var(--charcoal);margin-bottom:9px}
+    .svc-body p{font-family:var(--font-body);font-size:.98rem;line-height:1.75;color:var(--text-muted)}
+    .svc-link{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-family:var(--font-sans);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald);transition:gap .3s}
+    .svc-link:hover{gap:12px}
+
+    /* why */
+    .why{padding:110px 0;background:var(--ivory)}
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+    .why-list{display:flex;flex-direction:column;gap:28px}
+    .why-item{display:flex;gap:18px;align-items:flex-start}
+    .why-num{font-family:var(--font-display);font-size:2.8rem;font-weight:700;color:rgba(13,79,60,.12);line-height:1;min-width:46px}
+    .why-txt h3{font-family:var(--font-display);font-size:1.25rem;font-weight:600;color:var(--charcoal);margin-bottom:6px}
+    .why-txt p{font-family:var(--font-body);font-size:.98rem;line-height:1.8;color:var(--text-muted)}
+    .why-imgs{position:relative;height:560px}
+    .wi1{position:absolute;top:0;left:0;width:73%;height:380px;border-radius:4px;box-shadow:var(--shadow-deep);background:#1a6b52;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .wi1 img{width:100%;height:100%;object-fit:cover}
+    .wi2{position:absolute;bottom:0;right:0;width:62%;height:290px;border-radius:4px;border:5px solid var(--ivory);box-shadow:var(--shadow-deep);background:#2a8a6a;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .wi2 img{width:100%;height:100%;object-fit:cover}
+    .why-quote{position:absolute;bottom:68px;left:-16px;background:var(--emerald);padding:18px 22px;border-radius:4px;max-width:210px;box-shadow:var(--shadow-deep)}
+    .wq-text{font-family:var(--font-body);font-style:italic;font-size:.95rem;line-height:1.6;color:rgba(255,255,255,.88)}
+    .wq-src{font-family:var(--font-sans);font-size:.6rem;font-weight:700;letter-spacing:.14em;color:var(--gold);margin-top:7px}
+
+    /* testimonials */
+    .testi{padding:110px 0;background:linear-gradient(155deg,var(--emerald),#061f18);position:relative;overflow:hidden}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+    .tc{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:38px 30px;transition:all var(--trans)}
+    .tc:hover{background:rgba(255,255,255,.1);transform:translateY(-6px);border-color:rgba(201,168,76,.5)}
+    .tc-stars{color:var(--gold);font-size:.85rem;letter-spacing:3px;margin-bottom:18px}
+    .tc-q{font-family:var(--font-body);font-size:1.08rem;font-style:italic;line-height:1.8;color:rgba(255,255,255,.83);margin-bottom:26px}
+    .tc-auth{display:flex;align-items:center;gap:12px}
+    .tc-av{width:44px;height:44px;border-radius:50%;background:var(--emerald-lt);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--gold)}
+    .tc-name{font-family:var(--font-sans);font-size:.82rem;font-weight:700;color:var(--white)}
+    .tc-role{font-family:var(--font-sans);font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:.08em}
+
+    /* cta */
+    .cta{padding:90px 0;background:var(--gold);text-align:center}
+    .cta h2{font-family:var(--font-display);font-size:clamp(1.9rem,3.8vw,2.9rem);font-weight:700;color:var(--emerald);margin-bottom:14px}
+    .cta p{font-family:var(--font-body);font-size:1.15rem;color:rgba(13,79,60,.72);margin-bottom:36px}
+
+    /* faq */
+    .faq-sec{padding:90px 0;background:var(--ivory-dk)}
+    .faq-list{max-width:760px;margin:52px auto 0}
+    .faq-item{border-bottom:1px solid rgba(0,0,0,.08)}
+    .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 0;background:none;border:none;cursor:pointer;font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--charcoal);text-align:left;transition:color .3s}
+    .faq-q:hover{color:var(--emerald)}
+    .faq-q i{color:var(--gold);transition:transform .35s;min-width:18px}
+    .faq-q.open i{transform:rotate(180deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+    .faq-a.open{max-height:260px}
+    .faq-a p{font-family:var(--font-body);font-size:1.03rem;line-height:1.85;color:var(--text-muted);padding-bottom:18px}
+
+    /* page hero (inner pages) */
+    .pg-hero{background:linear-gradient(155deg,var(--emerald),#061f18);padding:154px 48px 76px;text-align:center;position:relative;overflow:hidden}
+    .pg-hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.6rem);color:var(--white);font-weight:700;margin-bottom:14px}
+    .pg-hero p{font-family:var(--font-body);font-size:1.15rem;font-style:italic;color:rgba(255,255,255,.65);max-width:580px;margin:0 auto}
+    .pg-hero .divider{margin:18px auto}
+    .pg-geo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .pg-geo svg{width:100%;height:100%;opacity:.06}
+
+    /* programs page */
+    .prog-sec{padding:90px 0;background:var(--ivory)}
+    .prog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:50px}
+    .prog-card{background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.06);display:flex;transition:all var(--trans);border-left:4px solid transparent}
+    .prog-card:hover{transform:translateX(6px);box-shadow:0 10px 36px rgba(0,0,0,.1);border-left-color:var(--gold)}
+    .prog-icon-col{width:88px;min-width:88px;background:rgba(13,79,60,.06);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--emerald)}
+    .prog-body{padding:24px 22px}
+    .prog-body h3{font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--charcoal);margin-bottom:7px}
+    .prog-body p{font-family:var(--font-body);font-size:.96rem;line-height:1.78;color:var(--text-muted)}
+    .prog-sched{display:inline-block;margin-top:10px;font-family:var(--font-sans);font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px}
+
+    /* about page */
+    .abt-story{padding:90px 0;background:var(--ivory)}
+    .abt-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+    .abt-img{width:100%;height:480px;border-radius:4px;box-shadow:var(--shadow-deep);background:#1a6b52;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .abt-img img{width:100%;height:100%;object-fit:cover}
+    .abt-text p{font-family:var(--font-body);font-size:1.08rem;line-height:1.9;color:var(--text-muted);margin-top:14px}
+    .values-sec{padding:80px 0;background:var(--ivory-dk)}
+    .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px}
+    .val-card{background:var(--white);border-radius:4px;padding:38px 30px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.05);transition:all var(--trans)}
+    .val-card:hover{transform:translateY(-6px);box-shadow:0 14px 38px rgba(0,0,0,.1)}
+    .val-icon{width:64px;height:64px;margin:0 auto 18px;background:rgba(13,79,60,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--emerald)}
+    .val-card h3{font-family:var(--font-display);font-size:1.22rem;font-weight:600;color:var(--charcoal);margin-bottom:10px}
+    .val-card p{font-family:var(--font-body);font-size:.97rem;line-height:1.75;color:var(--text-muted)}
+    .team-sec{padding:80px 0;background:var(--ivory)}
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px}
+    .team-card{background:var(--white);border-radius:4px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.06);text-align:center;transition:all var(--trans)}
+    .team-card:hover{transform:translateY(-6px)}
+    .team-img{width:100%;height:260px;background:#1a6b52;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .team-img img{width:100%;height:100%;object-fit:cover}
+    .team-img .img-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(255,255,255,.4)}
+    .team-img .img-ph i{font-size:3rem}
+    .team-body{padding:22px}
+    .team-body h3{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--charcoal);margin-bottom:3px}
+    .team-role{font-family:var(--font-sans);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+    .team-body p{font-family:var(--font-body);font-size:.93rem;line-height:1.7;color:var(--text-muted);margin-top:9px}
+
+    /* donate page */
+    .donate-sec{padding:90px 0;background:var(--ivory)}
+    .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:52px}
+    .pkg{background:var(--white);border-radius:4px;padding:44px 32px;box-shadow:0 4px 18px rgba(0,0,0,.06);text-align:center;position:relative;transition:all var(--trans);border-top:4px solid transparent}
+    .pkg:hover{transform:translateY(-8px);box-shadow:0 20px 48px rgba(0,0,0,.11)}
+    .pkg.featured{background:var(--emerald);border-top-color:var(--gold)}
+    .pkg-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--emerald);font-family:var(--font-sans);font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 14px;border-radius:20px}
+    .pkg-name{font-family:var(--font-sans);font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+    .pkg-amt{font-family:var(--font-display);font-size:2.8rem;font-weight:700;color:var(--charcoal);line-height:1}
+    .pkg.featured .pkg-amt{color:var(--white)}
+    .pkg-per{font-family:var(--font-sans);font-size:.78rem;color:var(--text-muted);margin-bottom:26px}
+    .pkg.featured .pkg-per{color:rgba(255,255,255,.55)}
+    .pkg-feats{margin-bottom:32px}
+    .pkg-feats li{font-family:var(--font-body);font-size:.98rem;color:var(--text-muted);padding:9px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;gap:9px}
+    .pkg.featured .pkg-feats li{color:rgba(255,255,255,.78);border-bottom-color:rgba(255,255,255,.1)}
+    .pkg-feats li i{color:var(--gold);font-size:.75rem}
+    .pb-outline{display:block;width:100%;padding:13px;font-family:var(--font-sans);font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;background:transparent;color:var(--emerald);border:2px solid var(--emerald);border-radius:2px;transition:all var(--trans)}
+    .pb-outline:hover{background:var(--emerald);color:var(--white)}
+    .pb-gold{display:block;width:100%;padding:13px;font-family:var(--font-sans);font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;background:var(--gold);color:var(--emerald);border:none;border-radius:2px;transition:all var(--trans)}
+    .pb-gold:hover{background:var(--gold-lt);transform:translateY(-2px)}
+    .donate-extra{background:var(--white);border-radius:4px;padding:44px;margin-top:50px;box-shadow:0 4px 18px rgba(0,0,0,.06);text-align:center}
+    .donate-extra h3{font-family:var(--font-display);font-size:1.7rem;color:var(--emerald);margin-bottom:10px}
+    .donate-extra p{font-family:var(--font-body);font-size:1.05rem;color:var(--text-muted);max-width:580px;margin:0 auto 28px;line-height:1.8}
+
+    /* contact page */
+    .contact-sec{padding:90px 0;background:var(--ivory)}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:72px}
+    .contact-info h2{font-family:var(--font-display);font-size:2rem;font-weight:600;color:var(--emerald);margin-bottom:10px}
+    .contact-info > p{font-family:var(--font-body);font-size:1.08rem;line-height:1.8;color:var(--text-muted);margin-bottom:32px}
+    .c-items{display:flex;flex-direction:column;gap:18px}
+    .c-item{display:flex;align-items:flex-start;gap:14px}
+    .c-icon{width:44px;height:44px;min-width:44px;background:rgba(13,79,60,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--emerald)}
+    .c-label{font-family:var(--font-sans);font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+    .c-val{font-family:var(--font-body);font-size:1.02rem;color:var(--charcoal);line-height:1.5}
+    .soc-row{display:flex;gap:10px;margin-top:22px}
+    .soc-btn{width:38px;height:38px;background:rgba(13,79,60,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--emerald);font-size:.88rem;transition:all var(--trans)}
+    .soc-btn:hover{background:var(--gold);color:var(--emerald);transform:translateY(-3px)}
+    .contact-form-wrap{background:var(--white);border-radius:4px;padding:48px 44px;box-shadow:0 8px 36px rgba(0,0,0,.08)}
+    .contact-form-wrap h3{font-family:var(--font-display);font-size:1.7rem;font-weight:600;color:var(--charcoal);margin-bottom:28px}
+    .fg{margin-bottom:20px}
+    .fg label{display:block;font-family:var(--font-sans);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald);margin-bottom:7px}
+    .fg input,.fg textarea,.fg select{width:100%;padding:13px 16px;border:1.5px solid rgba(0,0,0,.11);border-radius:3px;font-family:var(--font-body);font-size:.98rem;color:var(--charcoal);background:var(--ivory);transition:border-color var(--trans);outline:none;resize:none;appearance:none}
+    .fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--emerald)}
+    .f-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .f-submit{width:100%;padding:15px;background:var(--emerald);color:var(--white);font-family:var(--font-sans);font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:all var(--trans)}
+    .f-submit:hover{background:var(--emerald-lt);transform:translateY(-2px);box-shadow:0 8px 22px rgba(13,79,60,.28)}
+    .map-wrap{margin-top:52px;border-radius:4px;overflow:hidden;height:280px;box-shadow:0 8px 28px rgba(0,0,0,.09)}
+    .map-wrap iframe{width:100%;height:100%;border:none}
+
+    /* footer */
+    footer{background:#111;padding:72px 0 0}
+    .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;padding-bottom:56px}
+    .ft-brand p{font-family:var(--font-body);font-size:.97rem;line-height:1.8;color:rgba(255,255,255,.38);margin-top:14px;max-width:280px}
+    .ft-soc{display:flex;gap:10px;margin-top:20px}
+    .ft-soc a{width:36px;height:36px;background:rgba(255,255,255,.06);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:.82rem;transition:all var(--trans)}
+    .ft-soc a:hover{background:var(--gold);color:var(--emerald);transform:translateY(-3px)}
+    .ft-col h4{font-family:var(--font-sans);font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+    .ft-col ul{display:flex;flex-direction:column;gap:9px}
+    .ft-col ul li a{font-family:var(--font-body);font-size:.93rem;color:rgba(255,255,255,.38);transition:color .3s}
+    .ft-col ul li a:hover{color:var(--gold)}
+    .ft-bot{border-top:1px solid rgba(255,255,255,.07);padding:22px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .ft-bot p{font-family:var(--font-sans);font-size:.68rem;color:rgba(255,255,255,.26)}
+    .ft-bot-links{display:flex;gap:20px}
+    .ft-bot-links a{font-family:var(--font-sans);font-size:.68rem;color:rgba(255,255,255,.26);transition:color .3s}
+    .ft-bot-links a:hover{color:var(--gold)}
+
+    /* float buttons */
+    #back-top{position:fixed;bottom:30px;right:30px;z-index:500;width:46px;height:46px;background:var(--emerald);color:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:pointer;opacity:0;pointer-events:none;transition:all var(--trans);box-shadow:0 6px 18px rgba(0,0,0,.24)}
+    #back-top.show{opacity:1;pointer-events:all}
+    #back-top:hover{background:var(--gold);color:var(--emerald);transform:translateY(-3px)}
+    #wa-btn{position:fixed;bottom:86px;right:30px;z-index:500;width:46px;height:46px;background:#25d366;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.25rem;box-shadow:0 6px 18px rgba(37,211,102,.4);transition:all var(--trans)}
+    #wa-btn:hover{transform:scale(1.1)}
+
+    /* Geo pattern SVG helper */
+    .geo-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .geo-bg svg{width:100%;height:100%;opacity:.065}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .services-grid,.testi-grid{grid-template-columns:repeat(2,1fr)}
+      .stats-grid{grid-template-columns:repeat(2,1fr);gap:28px}
+      .ft-grid{grid-template-columns:1fr 1fr}
+      .intro-grid,.why-grid,.abt-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+      .prog-grid,.val-grid,.team-grid,.pkg-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:768px){
+      .container{padding:0 22px}
+      #navbar{padding:0 22px}
+      .nav-links{display:none}
+      .hbg{display:flex}
+      .hero-inner{padding:128px 22px 80px}
+      .services-grid,.testi-grid,.val-grid,.team-grid{grid-template-columns:1fr}
+      .intro-feats{grid-template-columns:1fr}
+      .f-row{grid-template-columns:1fr}
+      .contact-form-wrap{padding:28px 22px}
+      .ft-grid{grid-template-columns:1fr}
+      .ft-bot{flex-direction:column;text-align:center}
+      .why-imgs{height:340px}
+      .why-quote{left:0}
+      .pg-hero{padding:128px 22px 60px}
+      .pkg-grid{grid-template-columns:1fr}
+      .prog-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-name">Minaret Monarch</div>
+</div>
+
+<!-- FLOATS -->
+<div id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></div>
+<a id="wa-btn" href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo-wrap">
+    <span class="nav-logo-main">Minaret Monarch</span>
+    <span class="nav-logo-sub">Islamic Center of Excellence</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="nav('home',this)" class="active">Home</a></li>
+    <li><a href="#" onclick="nav('programs',this)">Programs</a></li>
+    <li><a href="#" onclick="nav('about',this)">About</a></li>
+    <li><a href="#" onclick="nav('donate',this)">Give</a></li>
+    <li><a href="#" onclick="nav('contact',this)" class="nav-cta-btn">Contact Us</a></li>
+  </ul>
+  <div class="hbg" id="hbg" onclick="mobToggle()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#" onclick="nav('home');mobToggle()">Home</a>
+  <a href="#" onclick="nav('programs');mobToggle()">Programs</a>
+  <a href="#" onclick="nav('about');mobToggle()">About</a>
+  <a href="#" onclick="nav('donate');mobToggle()">Give &amp; Support</a>
+  <a href="#" onclick="nav('contact');mobToggle()">Contact Us</a>
+</div>
+<div class="mob-overlay" id="mobOverlay" onclick="mobToggle()"></div>
+
+<!-- ═══════════════════ HOME PAGE ═══════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Hero image using a reliable source -->
+    <img class="hero-img" src="https://images.unsplash.com/photo-1564769610726-59cead6a6f8f?auto=format&fit=crop&w=1800&q=60" alt="Mosque" onerror="this.style.display='none'" />
+    <div class="hero-geo">
+      <svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs><pattern id="gp1" x="0" y="0" width="70" height="70" patternUnits="userSpaceOnUse">
+          <polygon points="35,4 66,20 66,50 35,66 4,50 4,20" fill="none" stroke="#c9a84c" stroke-width=".7"/>
+          <polygon points="35,14 56,25 56,45 35,56 14,45 14,25" fill="none" stroke="#c9a84c" stroke-width=".4"/>
+        </pattern></defs>
+        <rect width="900" height="700" fill="url(#gp1)"/>
+      </svg>
+    </div>
+    <!-- Large decorative star -->
+    <div class="hero-deco">
+      <svg width="380" height="380" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#c9a84c">
+        <circle cx="100" cy="100" r="90" stroke-width=".8"/>
+        <circle cx="100" cy="100" r="70" stroke-width=".6"/>
+        <polygon points="100,15 118,68 174,68 129,100 147,153 100,121 53,153 71,100 26,68 82,68" stroke-width="1.2"/>
+        <polygon points="100,30 113,72 157,72 122,97 135,139 100,114 65,139 78,97 43,72 87,72" stroke-width=".6"/>
+      </svg>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <h1 class="hero-title">A Sacred Space<br>for <span>Every Soul</span></h1>
+      <p class="hero-p">Welcome to Minaret Monarch — a premier Islamic center where faith, knowledge, and community come together in harmony. You are always welcome here.</p>
+      <div class="hero-btns">
+        <button class="btn-gold" onclick="nav('programs')"><i class="fas fa-mosque"></i> Explore Programs</button>
+        <button class="btn-ghost" onclick="nav('contact')"><i class="fas fa-calendar-check"></i> Plan Your Visit</button>
+      </div>
+    </div>
+    <div class="hero-scroll"><i class="fas fa-chevron-down"></i><span>Scroll</span></div>
+  </section>
+
+  <!-- PRAYER TIMES -->
+  <div class="prayer-bar">
+    <div class="container">
+      <div class="p-item"><div class="p-name">Fajr</div><div class="p-time">5:15 AM</div></div>
+      <div class="p-sep"></div>
+      <div class="p-item"><div class="p-name">Dhuhr</div><div class="p-time">1:00 PM</div></div>
+      <div class="p-sep"></div>
+      <div class="p-item"><div class="p-name">Asr</div><div class="p-time">4:30 PM</div></div>
+      <div class="p-sep"></div>
+      <div class="p-item"><div class="p-name">Maghrib</div><div class="p-time">7:45 PM</div></div>
+      <div class="p-sep"></div>
+      <div class="p-item"><div class="p-name">Isha</div><div class="p-time">9:15 PM</div></div>
+      <div class="p-sep"></div>
+      <div class="p-item"><div class="p-name">Jumu'ah</div><div class="p-time">1:30 PM</div></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="rl">
+          <div class="intro-img-wrap">
+            <div style="width:100%;height:500px;border-radius:3px;overflow:hidden;box-shadow:var(--shadow-deep);background:linear-gradient(135deg,#1a6b52,#0d4f3c);display:flex;align-items:center;justify-content:center;position:relative">
+              <img src="https://images.unsplash.com/photo-1564769625095-09c84e44e0c8?auto=format&fit=crop&w=800&q=60" alt="Mosque Interior" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'" />
+              <i class="fas fa-mosque" style="font-size:5rem;color:rgba(201,168,76,.25);position:relative;z-index:1"></i>
+            </div>
+            <div class="intro-img-badge">
+              <div class="intro-img-badge-num">15+</div>
+              <div class="intro-img-badge-txt">Years of<br>Service</div>
+            </div>
+            <div style="position:absolute;bottom:-24px;right:-20px;width:170px;height:170px;border-radius:3px;border:5px solid var(--ivory);box-shadow:var(--shadow-deep);overflow:hidden;background:linear-gradient(135deg,#2a8a6a,#1a6b52);display:flex;align-items:center;justify-content:center">
+              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=400&q=60" alt="Islamic Architecture" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'" />
+            </div>
+          </div>
+        </div>
+        <div class="rr">
+          <div class="tag">Our Story</div>
+          <h2 class="section-title">A Beacon of Faith<br>&amp; Community</h2>
+          <div class="divider"></div>
+          <p class="sub">Minaret Monarch was founded with one vision: to create a sanctuary where Muslims of all backgrounds gather in worship, learning, and fellowship.</p>
+          <p style="font-family:var(--font-body);font-size:1.05rem;line-height:1.9;color:var(--text-muted);margin-top:14px">Our beautifully designed facility houses a grand prayer hall, Quran and Arabic classrooms, a community hall, and a children's learning centre — all built to inspire reverence and belonging.</p>
+          <div class="intro-feats">
+            <div class="intro-feat"><div class="feat-icon"><i class="fas fa-mosque"></i></div><div class="feat-text"><strong>Grand Prayer Hall</strong><span>Capacity 1,200+</span></div></div>
+            <div class="intro-feat"><div class="feat-icon"><i class="fas fa-book-open"></i></div><div class="feat-text"><strong>Quran Academy</strong><span>All ages & levels</span></div></div>
+            <div class="intro-feat"><div class="feat-icon"><i class="fas fa-users"></i></div><div class="feat-text"><strong>Community Programs</strong><span>Events & counseling</span></div></div>
+            <div class="intro-feat"><div class="feat-icon"><i class="fas fa-hands-helping"></i></div><div class="feat-text"><strong>Charity Initiatives</strong><span>Zakat & food drives</span></div></div>
+          </div>
+          <br/>
+          <button class="btn-gold" onclick="nav('about')"><i class="fas fa-arrow-right"></i> Our Full Story</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="geo-bg">
+      <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs><pattern id="gp2" x="0" y="0" width="55" height="55" patternUnits="userSpaceOnUse">
+          <polygon points="27.5,3 52,17 52,38 27.5,52 3,38 3,17" fill="none" stroke="#c9a84c" stroke-width=".5"/>
+        </pattern></defs>
+        <rect width="900" height="250" fill="url(#gp2)"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="stats-grid">
+        <div class="r"><span class="stat-n" data-target="1200">0</span><span class="stat-l">Daily Worshippers</span></div>
+        <div class="r" style="transition-delay:.1s"><span class="stat-n" data-target="15">0</span><span class="stat-l">Years of Service</span></div>
+        <div class="r" style="transition-delay:.2s"><span class="stat-n" data-target="500">0</span><span class="stat-l">Students Enrolled</span></div>
+        <div class="r" style="transition-delay:.3s"><span class="stat-n" data-target="48">0</span><span class="stat-l">Programs Offered</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="container">
+      <div class="sec-head r">
+        <div class="tag">What We Offer</div>
+        <h2 class="section-title">Our Core Programs<br>&amp; Services</h2>
+        <div class="divider"></div>
+        <p class="sub">From daily prayers to Islamic education — Minaret Monarch is your complete Islamic home.</p>
+      </div>
+      <div class="services-grid">
+        <!-- Card 1 -->
+        <div class="svc-card r">
+          <div class="svc-img-wrap">
+            <img src="https://images.unsplash.com/photo-1609337440-9c3e6b6a5d71?auto=format&fit=crop&w=600&q=60" alt="Prayer Services" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="img-fallback" style="display:none"><i class="fas fa-pray"></i><span>Prayer Services</span></div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-icon"><i class="fas fa-pray"></i></div>
+            <h3>Daily Prayer Services</h3>
+            <p>Five daily prayers led by our qualified Imams in a beautifully designed hall. Friday Jumu'ah with inspiring khutbahs.</p>
+            <a class="svc-link" href="#" onclick="nav('programs')">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="svc-card r" style="transition-delay:.1s">
+          <div class="svc-img-wrap">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=60" alt="Quran Education" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="img-fallback" style="display:none"><i class="fas fa-book-quran"></i><span>Quran &amp; Education</span></div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-icon"><i class="fas fa-book-open"></i></div>
+            <h3>Quran &amp; Islamic Studies</h3>
+            <p>Comprehensive Quran memorisation, Tajweed, Arabic language, and Islamic studies for children and adults.</p>
+            <a class="svc-link" href="#" onclick="nav('programs')">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="svc-card r" style="transition-delay:.2s">
+          <div class="svc-img-wrap">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=60" alt="Youth Programs" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="img-fallback" style="display:none"><i class="fas fa-child"></i><span>Youth Programs</span></div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-icon"><i class="fas fa-child"></i></div>
+            <h3>Youth &amp; Family Programs</h3>
+            <p>Nurturing the next generation of Muslim leaders through mentorship, activities, and Islamic values.</p>
+            <a class="svc-link" href="#" onclick="nav('programs')">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="svc-card r" style="transition-delay:.3s">
+          <div class="svc-img-wrap">
+            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=60" alt="Community Outreach" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="img-fallback" style="display:none"><i class="fas fa-hands-helping"></i><span>Community Outreach</span></div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-icon"><i class="fas fa-hands-holding-heart"></i></div>
+            <h3>Community Outreach</h3>
+            <p>Food drives, Zakat distribution, interfaith dialogues, and social welfare programs for the community.</p>
+            <a class="svc-link" href="#" onclick="nav('programs')">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="svc-card r" style="transition-delay:.4s">
+          <div class="svc-img-wrap">
+            <img src="https://images.unsplash.com/photo-1551649001-7a2d6ab5030a?auto=format&fit=crop&w=600&q=60" alt="Marriage Services" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="img-fallback" style="display:none"><i class="fas fa-ring"></i><span>Marriage Services</span></div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-icon"><i class="fas fa-ring"></i></div>
+            <h3>Marriage &amp; Counselling</h3>
+            <p>Nikah ceremonies, pre-marital counselling, and family guidance services for a blessed and lasting union.</p>
+            <a class="svc-link" href="#" onclick="nav('programs')">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="svc-card r" style="transition-delay:.5s">
+          <div class="svc-img-wrap">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=60" alt="Islamic Events" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="img-fallback" style="display:none"><i class="fas fa-star-and-crescent"></i><span>Events &amp; Lectures</span></div>
+          </div>
+          <div class="svc-body">
+            <div class="svc-icon"><i class="fas fa-star-and-crescent"></i></div>
+            <h3>Islamic Events &amp; Lectures</h3>
+            <p>Regular lectures, Ramadan programs, Eid celebrations, and special events throughout the year.</p>
+            <a class="svc-link" href="#" onclick="nav('programs')">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-list">
+          <div class="r"><div class="tag">Why Choose Us</div><h2 class="section-title">Excellence Rooted<br>in Faith</h2><div class="divider"></div></div>
+          <div class="why-item r">
+            <div class="why-num">01</div>
+            <div class="why-txt"><h3>Qualified Scholarship</h3><p>Our Imams hold degrees from renowned Islamic universities, ensuring authentic and grounded guidance.</p></div>
+          </div>
+          <div class="why-item r" style="transition-delay:.1s">
+            <div class="why-num">02</div>
+            <div class="why-txt"><h3>Inclusive Community</h3><p>We welcome Muslims of all backgrounds and schools of thought in a spirit of brotherhood and sisterhood.</p></div>
+          </div>
+          <div class="why-item r" style="transition-delay:.2s">
+            <div class="why-num">03</div>
+            <div class="why-txt"><h3>State-of-the-Art Facilities</h3><p>A grand prayer hall, classrooms, library, and dedicated women's section maintained to the highest standard.</p></div>
+          </div>
+          <div class="why-item r" style="transition-delay:.3s">
+            <div class="why-num">04</div>
+            <div class="why-txt"><h3>Transparent Governance</h3><p>Full financial transparency and community accountability ensure your trust is always honoured.</p></div>
+          </div>
+        </div>
+        <div class="why-imgs rr">
+          <div class="wi1">
+            <img src="https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=700&q=60" alt="Mosque" onerror="this.style.display='none'" />
+          </div>
+          <div class="wi2">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=500&q=60" alt="Learning" onerror="this.style.display='none'" />
+          </div>
+          <div class="why-quote">
+            <div class="wq-text">"The best of people are those most beneficial to others."</div>
+            <div class="wq-src">— Prophet Muhammad ﷺ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi">
+    <div class="geo-bg">
+      <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs><pattern id="gp3" x="0" y="0" width="55" height="55" patternUnits="userSpaceOnUse">
+          <polygon points="27.5,3 52,17 52,38 27.5,52 3,38 3,17" fill="none" stroke="#c9a84c" stroke-width=".5"/>
+        </pattern></defs>
+        <rect width="900" height="600" fill="url(#gp3)"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="sec-head r">
+        <div class="tag" style="justify-content:center">Community Voices</div>
+        <h2 class="section-title light">What Our Congregation Says</h2>
+        <div class="divider" style="margin:18px auto"></div>
+      </div>
+      <div class="testi-grid">
+        <div class="tc r">
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-q">"Minaret Monarch has been a spiritual home for my family for over a decade. The programs for children are exceptional and the Imams truly inspiring."</p>
+          <div class="tc-auth"><div class="tc-av">AK</div><div><div class="tc-name">Ahmed Karimi</div><div class="tc-role">Community Member · 10 Years</div></div></div>
+        </div>
+        <div class="tc r" style="transition-delay:.15s">
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-q">"The Quran classes for my daughters have been transformative. The teachers are patient, knowledgeable, and genuinely invested in every student's progress."</p>
+          <div class="tc-auth"><div class="tc-av">FH</div><div><div class="tc-name">Fatima Hassan</div><div class="tc-role">Parent · 5 Years</div></div></div>
+        </div>
+        <div class="tc r" style="transition-delay:.3s">
+          <div class="tc-stars">★★★★★</div>
+          <p class="tc-q">"As a revert, I was welcomed with open arms. The community programs helped me find my footing in Islam. Forever grateful for this place."</p>
+          <div class="tc-auth"><div class="tc-av">SR</div><div><div class="tc-name">Sarah Rodriguez</div><div class="tc-role">New Muslim · 3 Years</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <div class="faq-sec">
+    <div class="container">
+      <div class="sec-head r">
+        <div class="tag" style="justify-content:center">Got Questions</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="divider" style="margin:18px auto"></div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q" onclick="faqToggle(this)">What are the visiting hours for the mosque? <i class="fas fa-chevron-down"></i></button><div class="faq-a"><p>Minaret Monarch is open daily from Fajr until after Isha prayer. The office is open Monday–Saturday, 9:00 AM to 6:00 PM. All are welcome to pray and explore.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="faqToggle(this)">How can I enrol my child in the Quran Academy? <i class="fas fa-chevron-down"></i></button><div class="faq-a"><p>Enrolment is open year-round. Register via our contact form, visit the office, or call us. We offer morning, evening, and weekend batches to suit all schedules.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="faqToggle(this)">Do you offer support for reverts (new Muslims)? <i class="fas fa-chevron-down"></i></button><div class="faq-a"><p>Absolutely. Our New Muslim Support program offers mentorship, beginner classes, and a welcoming community group for those new to Islam.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="faqToggle(this)">Can I book the hall for an Islamic event? <i class="fas fa-chevron-down"></i></button><div class="faq-a"><p>Yes. Our community hall is available for Islamic events, Aqeeqah, marriages, and more. Contact us in advance to check availability and booking details.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="faqToggle(this)">How can I make a donation or pay Zakat? <i class="fas fa-chevron-down"></i></button><div class="faq-a"><p>Donations can be made in person, through our online donation form on the Give page, or via bank transfer. We accept Zakat, Sadaqah, and Waqf with full transparency.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="container">
+      <h2 class="r">Join Our Community Today</h2>
+      <p class="r">Whether you're a lifelong Muslim or exploring Islam for the first time — you are always welcome here.</p>
+      <button class="btn-green r" onclick="nav('contact')"><i class="fas fa-mosque"></i> Plan Your Visit</button>
+    </div>
+  </div>
+
+</div><!-- /home page -->
+
+
+<!-- ═══════════════════ PROGRAMS PAGE ═══════════════════ -->
+<div id="page-programs" class="page">
+  <div class="pg-hero">
+    <div class="pg-geo"><svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><pattern id="gp4" x="0" y="0" width="55" height="55" patternUnits="userSpaceOnUse"><polygon points="27.5,3 52,17 52,38 27.5,52 3,38 3,17" fill="none" stroke="#c9a84c" stroke-width=".5"/></pattern></defs><rect width="900" height="400" fill="url(#gp4)"/></svg></div>
+    <div class="tag" style="justify-content:center;margin-bottom:10px">Minaret Monarch</div>
+    <h1>Programs &amp; Services</h1>
+    <div class="divider"></div>
+    <p>Comprehensive programs nurturing faith, knowledge, and community at every stage of life.</p>
+  </div>
+
+  <div class="prog-sec">
+    <div class="container">
+      <div class="sec-head r"><div class="tag">Religious Services</div><h2 class="section-title">Prayer &amp; Worship</h2><div class="divider"></div></div>
+      <div class="prog-grid">
+        <div class="prog-card r"><div class="prog-icon-col"><i class="fas fa-pray"></i></div><div class="prog-body"><h3>Five Daily Prayers</h3><p>All five prayers held in congregation, led by resident Imams. A dedicated sisters' section with full facilities is available.</p><span class="prog-sched">Daily · All Prayer Times</span></div></div>
+        <div class="prog-card r" style="transition-delay:.1s"><div class="prog-icon-col"><i class="fas fa-star-and-crescent"></i></div><div class="prog-body"><h3>Friday Jumu'ah Prayer</h3><p>Two Jumu'ah sessions with powerful khutbahs by senior scholars to accommodate our large congregation.</p><span class="prog-sched">Every Friday · 1:00 & 1:30 PM</span></div></div>
+        <div class="prog-card r"><div class="prog-icon-col"><i class="fas fa-moon"></i></div><div class="prog-body"><h3>Taraweeh &amp; Ramadan</h3><p>Full Taraweeh prayers, Tahajjud circles, Iftar gatherings, and special Laylatul Qadr programs throughout Ramadan.</p><span class="prog-sched">Annual · Ramadan</span></div></div>
+        <div class="prog-card r" style="transition-delay:.1s"><div class="prog-icon-col"><i class="fas fa-drum"></i></div><div class="prog-body"><h3>Eid Prayers &amp; Celebrations</h3><p>Grand Eid ul-Fitr and Eid ul-Adha prayers with festive celebrations, community meals, and family activities.</p><span class="prog-sched">Twice Yearly</span></div></div>
+      </div>
+
+      <div style="height:60px"></div>
+      <div class="sec-head r"><div class="tag">Education</div><h2 class="section-title">Islamic Learning</h2><div class="divider"></div></div>
+      <div class="prog-grid">
+        <div class="prog-card r"><div class="prog-icon-col"><i class="fas fa-book-quran"></i></div><div class="prog-body"><h3>Quran Memorisation (Hifz)</h3><p>A structured Hifz program for children and adults with qualified Huffaz using proven techniques.</p><span class="prog-sched">Mon–Sat · Morning & Evening</span></div></div>
+        <div class="prog-card r" style="transition-delay:.1s"><div class="prog-icon-col"><i class="fas fa-language"></i></div><div class="prog-body"><h3>Tajweed &amp; Recitation</h3><p>Correct pronunciation and rules of Quran recitation from beginner to advanced with certified instructors.</p><span class="prog-sched">Daily · All Levels</span></div></div>
+        <div class="prog-card r"><div class="prog-icon-col"><i class="fas fa-graduation-cap"></i></div><div class="prog-body"><h3>Arabic Language Classes</h3><p>Classical and Modern Standard Arabic for all ages, helping Muslims connect with the Quran more deeply.</p><span class="prog-sched">Weekdays & Weekends</span></div></div>
+        <div class="prog-card r" style="transition-delay:.1s"><div class="prog-icon-col"><i class="fas fa-mosque"></i></div><div class="prog-body"><h3>Islamic Studies &amp; Fiqh</h3><p>Aqeedah, Fiqh, Seerah, and Islamic ethics — comprehensive studies suitable for all ages and backgrounds.</p><span class="prog-sched">Weekly Classes</span></div></div>
+      </div>
+
+      <div style="height:60px"></div>
+      <div class="sec-head r"><div class="tag">Community</div><h2 class="section-title">Outreach &amp; Welfare</h2><div class="divider"></div></div>
+      <div class="prog-grid">
+        <div class="prog-card r"><div class="prog-icon-col"><i class="fas fa-hands-holding-heart"></i></div><div class="prog-body"><h3>Food Bank &amp; Zakat</h3><p>Monthly food drives and Zakat distribution to families in need, with full transparency and accountability.</p><span class="prog-sched">Monthly</span></div></div>
+        <div class="prog-card r" style="transition-delay:.1s"><div class="prog-icon-col"><i class="fas fa-child"></i></div><div class="prog-body"><h3>Youth Leadership Program</h3><p>Building the next generation of Muslim leaders through mentorship, Islamic values, and life skills.</p><span class="prog-sched">Bi-Weekly</span></div></div>
+        <div class="prog-card r"><div class="prog-icon-col"><i class="fas fa-ring"></i></div><div class="prog-body"><h3>Marriage &amp; Family Counselling</h3><p>Nikah ceremonies, pre-marital counselling, and family therapy by qualified Islamic counsellors.</p><span class="prog-sched">By Appointment</span></div></div>
+        <div class="prog-card r" style="transition-delay:.1s"><div class="prog-icon-col"><i class="fas fa-handshake"></i></div><div class="prog-body"><h3>New Muslim Support</h3><p>Dedicated program welcoming and guiding those new to Islam with mentorship and beginner classes.</p><span class="prog-sched">Open Enrolment</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="cta"><div class="container"><h2>Ready to Join a Program?</h2><p>Register today and become part of a thriving, faith-filled community.</p><button class="btn-green" onclick="nav('contact')"><i class="fas fa-envelope"></i> Get In Touch</button></div></div>
+</div>
+
+<!-- ═══════════════════ ABOUT PAGE ═══════════════════ -->
+<div id="page-about" class="page">
+  <div class="pg-hero">
+    <div class="pg-geo"><svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><pattern id="gp5" x="0" y="0" width="55" height="55" patternUnits="userSpaceOnUse"><polygon points="27.5,3 52,17 52,38 27.5,52 3,38 3,17" fill="none" stroke="#c9a84c" stroke-width=".5"/></pattern></defs><rect width="900" height="400" fill="url(#gp5)"/></svg></div>
+    <div class="tag" style="justify-content:center;margin-bottom:10px">Our Story</div>
+    <h1>About Minaret Monarch</h1>
+    <div class="divider"></div>
+    <p>Founded on faith, built on community, guided by knowledge.</p>
+  </div>
+
+  <div class="abt-story">
+    <div class="container">
+      <div class="abt-grid">
+        <div class="rl">
+          <div class="abt-img">
+            <img src="https://images.unsplash.com/photo-1564769625095-09c84e44e0c8?auto=format&fit=crop&w=800&q=60" alt="Minaret Monarch Story" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div class="rr abt-text">
+          <div class="tag">Our Journey</div>
+          <h2 class="section-title">From Humble Beginnings<br>to a Thriving Centre</h2>
+          <div class="divider"></div>
+          <p>Minaret Monarch began over 15 years ago as a small gathering of dedicated Muslims who dreamed of a place where faith could flourish. What started in a community hall has grown into a landmark Islamic centre serving thousands of families.</p>
+          <p>Our founders believed a mosque should be more than a place of prayer — it should be a hub of learning, compassion, and service. That vision has guided every decision, from the architecture of our building to the breadth of our programs.</p>
+          <p>Today, Minaret Monarch stands as a beacon of Islamic excellence — recognised for its scholarship, warmth, and commitment to serving the Muslim community and society at large.</p>
+          <br/>
+          <button class="btn-gold" onclick="nav('contact')"><i class="fas fa-door-open"></i> Visit Us Today</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="values-sec">
+    <div class="container">
+      <div class="sec-head r"><div class="tag" style="justify-content:center">Our Foundation</div><h2 class="section-title">Mission, Vision &amp; Values</h2><div class="divider" style="margin:18px auto"></div></div>
+      <div class="val-grid">
+        <div class="val-card r"><div class="val-icon"><i class="fas fa-bullseye"></i></div><h3>Our Mission</h3><p>To establish a premier Islamic centre serving as a spiritual home, educational institution, and community resource for Muslims of all backgrounds.</p></div>
+        <div class="val-card r" style="transition-delay:.1s"><div class="val-icon"><i class="fas fa-eye"></i></div><h3>Our Vision</h3><p>To be the most trusted and impactful Islamic centre in the region — nurturing generations of confident, knowledgeable, and compassionate Muslims.</p></div>
+        <div class="val-card r" style="transition-delay:.2s"><div class="val-icon"><i class="fas fa-heart"></i></div><h3>Our Values</h3><p>Taqwa, Ilm, Rahma, Adl, and Shura — God-consciousness, knowledge, compassion, justice, and consultation guide everything we do.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-sec">
+    <div class="container">
+      <div class="sec-head r"><div class="tag" style="justify-content:center">Leadership</div><h2 class="section-title">Our Scholars &amp; Leadership</h2><div class="divider" style="margin:18px auto"></div></div>
+      <div class="team-grid">
+        <div class="team-card r">
+          <div class="team-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=60" alt="Sheikh Abdullah" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="img-ph" style="display:none"><i class="fas fa-user-tie"></i></div>
+          </div>
+          <div class="team-body"><h3>Sheikh Abdullah Al-Rashid</h3><div class="team-role">Senior Imam &amp; Director</div><p>Graduate of Al-Azhar University with 20+ years of service. Specialises in Quranic sciences and community development.</p></div>
+        </div>
+        <div class="team-card r" style="transition-delay:.1s">
+          <div class="team-img">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=60" alt="Ustadh Yusuf" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="img-ph" style="display:none"><i class="fas fa-user-graduate"></i></div>
+          </div>
+          <div class="team-body"><h3>Ustadh Yusuf Al-Ameen</h3><div class="team-role">Head of Education</div><p>Hafiz of the Quran with an MA in Islamic Education. Leads the Quran Academy and all educational programs.</p></div>
+        </div>
+        <div class="team-card r" style="transition-delay:.2s">
+          <div class="team-img">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=60" alt="Br Khalid" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="img-ph" style="display:none"><i class="fas fa-user"></i></div>
+          </div>
+          <div class="team-body"><h3>Br. Khalid Ibrahim</h3><div class="team-role">Community Director</div><p>Passionate community builder with expertise in social welfare, youth development, and interfaith relations.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ DONATE PAGE ═══════════════════ -->
+<div id="page-donate" class="page">
+  <div class="pg-hero">
+    <div class="pg-geo"><svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><pattern id="gp6" x="0" y="0" width="55" height="55" patternUnits="userSpaceOnUse"><polygon points="27.5,3 52,17 52,38 27.5,52 3,38 3,17" fill="none" stroke="#c9a84c" stroke-width=".5"/></pattern></defs><rect width="900" height="400" fill="url(#gp6)"/></svg></div>
+    <div class="tag" style="justify-content:center;margin-bottom:10px">Give &amp; Support</div>
+    <h1>Support Minaret Monarch</h1>
+    <div class="divider"></div>
+    <p>Your generosity keeps this sacred space alive. Every donation is an investment in faith, knowledge, and community.</p>
+  </div>
+  <div class="donate-sec">
+    <div class="container">
+      <div class="sec-head r"><div class="tag" style="justify-content:center">Donation Programs</div><h2 class="section-title">Choose How You Give</h2><div class="divider" style="margin:18px auto"></div><p class="sub" style="margin:0 auto;text-align:center">Every contribution is a sadaqah jariyah — continuous charity benefiting you in this life and the hereafter.</p></div>
+      <div class="pkg-grid">
+        <div class="pkg r">
+          <div class="pkg-name">Supporter</div>
+          <div class="pkg-amt">$25</div>
+          <div class="pkg-per">per month</div>
+          <ul class="pkg-feats">
+            <li><i class="fas fa-check"></i> General operations fund</li>
+            <li><i class="fas fa-check"></i> Utility &amp; maintenance support</li>
+            <li><i class="fas fa-check"></i> Monthly donor newsletter</li>
+            <li><i class="fas fa-check"></i> Name in annual report</li>
+          </ul>
+          <button class="pb-outline" onclick="nav('contact')">Donate Now</button>
+        </div>
+        <div class="pkg featured r" style="transition-delay:.1s">
+          <div class="pkg-badge">Most Blessed</div>
+          <div class="pkg-name">Patron</div>
+          <div class="pkg-amt">$100</div>
+          <div class="pkg-per">per month</div>
+          <ul class="pkg-feats">
+            <li><i class="fas fa-check"></i> Education programs funding</li>
+            <li><i class="fas fa-check"></i> Scholar honorarium support</li>
+            <li><i class="fas fa-check"></i> Sponsor a Quran student</li>
+            <li><i class="fas fa-check"></i> Priority event invitations</li>
+            <li><i class="fas fa-check"></i> Quarterly impact report</li>
+          </ul>
+          <button class="pb-gold" onclick="nav('contact')">Become a Patron</button>
+        </div>
+        <div class="pkg r" style="transition-delay:.2s">
+          <div class="pkg-name">Benefactor</div>
+          <div class="pkg-amt">$500</div>
+          <div class="pkg-per">per month</div>
+          <ul class="pkg-feats">
+            <li><i class="fas fa-check"></i> Major project sponsorship</li>
+            <li><i class="fas fa-check"></i> Name a classroom or facility</li>
+            <li><i class="fas fa-check"></i> Fund a scholarship program</li>
+            <li><i class="fas fa-check"></i> VIP event access</li>
+            <li><i class="fas fa-check"></i> Annual recognition dinner</li>
+          </ul>
+          <button class="pb-outline" onclick="nav('contact')">Contact Us</button>
+        </div>
+      </div>
+      <div class="donate-extra r">
+        <div class="tag" style="justify-content:center;margin-bottom:10px">One-Time Giving</div>
+        <h3>Zakat, Sadaqah &amp; Waqf</h3>
+        <p>We accept Zakat al-Maal, Sadaqah, Fitrana, and Waqf donations — managed with full transparency and distributed according to Islamic guidelines.</p>
+        <button class="btn-gold" onclick="nav('contact')"><i class="fas fa-hand-holding-heart"></i> Make a One-Time Gift</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CONTACT PAGE ═══════════════════ -->
+<div id="page-contact" class="page">
+  <div class="pg-hero">
+    <div class="pg-geo"><svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><pattern id="gp7" x="0" y="0" width="55" height="55" patternUnits="userSpaceOnUse"><polygon points="27.5,3 52,17 52,38 27.5,52 3,38 3,17" fill="none" stroke="#c9a84c" stroke-width=".5"/></pattern></defs><rect width="900" height="400" fill="url(#gp7)"/></svg></div>
+    <div class="tag" style="justify-content:center;margin-bottom:10px">Reach Us</div>
+    <h1>Contact Minaret Monarch</h1>
+    <div class="divider"></div>
+    <p>We'd love to hear from you. Come visit, call, or send a message.</p>
+  </div>
+  <div class="contact-sec">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="rl contact-info">
+          <h2>Get In Touch</h2>
+          <p>Whether you have a question about our programs, want to register, or simply wish to connect — our team is here for you.</p>
+          <div class="c-items">
+            <div class="c-item"><div class="c-icon"><i class="fas fa-envelope"></i></div><div><div class="c-label">Email</div><div class="c-val">contactglanders@gmail.com</div></div></div>
+            <div class="c-item"><div class="c-icon"><i class="fas fa-phone"></i></div><div><div class="c-label">Phone</div><div class="c-val">+1 (555) 000-0000</div></div></div>
+            <div class="c-item"><div class="c-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="c-label">Address</div><div class="c-val">123 Faith Avenue, City, State 00000</div></div></div>
+            <div class="c-item"><div class="c-icon"><i class="fas fa-clock"></i></div><div><div class="c-label">Office Hours</div><div class="c-val">Mon–Sat: 9:00 AM – 6:00 PM<br>Open daily for all prayers</div></div></div>
+          </div>
+          <div class="soc-row">
+            <a class="soc-btn" href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a class="soc-btn" href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a class="soc-btn" href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a class="soc-btn" href="#" title="X"><i class="fab fa-x-twitter"></i></a>
+            <a class="soc-btn" href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="rr">
+          <div class="contact-form-wrap">
+            <h3>Send Us a Message</h3>
+            <form onsubmit="submitForm(event)">
+              <div class="f-row">
+                <div class="fg"><label>First Name</label><input type="text" placeholder="Ibrahim" required /></div>
+                <div class="fg"><label>Last Name</label><input type="text" placeholder="Al-Hassan" required /></div>
+              </div>
+              <div class="fg"><label>Email Address</label><input type="email" placeholder="you@example.com" required /></div>
+              <div class="fg"><label>Subject</label>
+                <select>
+                  <option>General Enquiry</option>
+                  <option>Program Registration</option>
+                  <option>Donation / Zakat</option>
+                  <option>Event Booking</option>
+                  <option>Nikah / Marriage</option>
+                  <option>New Muslim Support</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="fg"><label>Your Message</label><textarea rows="5" placeholder="How can we help you?"></textarea></div>
+              <button type="submit" class="f-submit" id="formBtn"><i class="fas fa-paper-plane"></i> &nbsp;Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap r">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.3059353029!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1234567890" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ FOOTER (always visible) ═══════════════════ -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="nav-logo-wrap">
+          <span class="nav-logo-main" style="font-size:1.5rem">Minaret Monarch</span>
+          <span class="nav-logo-sub" style="color:rgba(201,168,76,.4)">Islamic Center of Excellence</span>
+        </div>
+        <p>A sacred sanctuary for worship, learning, and community — welcoming all who seek the light of faith.</p>
+        <div class="ft-soc">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" onclick="nav('home')">Home</a></li>
+          <li><a href="#" onclick="nav('programs')">Programs</a></li>
+          <li><a href="#" onclick="nav('about')">About Us</a></li>
+          <li><a href="#" onclick="nav('donate')">Give &amp; Support</a></li>
+          <li><a href="#" onclick="nav('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Prayer Times</h4>
+        <ul>
+          <li><a href="#">Fajr — 5:15 AM</a></li>
+          <li><a href="#">Dhuhr — 1:00 PM</a></li>
+          <li><a href="#">Asr — 4:30 PM</a></li>
+          <li><a href="#">Maghrib — 7:45 PM</a></li>
+          <li><a href="#">Isha — 9:15 PM</a></li>
+          <li><a href="#">Jumu'ah — 1:30 PM</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:contactglanders@gmail.com">contactglanders@gmail.com</a></li>
+          <li><a href="tel:+15550000000">+1 (555) 000-0000</a></li>
+          <li><a href="#">123 Faith Avenue, City, State</a></li>
+          <li><a href="#">Mon–Sat: 9AM – 6PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p>© 2025 Minaret Monarch Islamic Center. All rights reserved.</p>
+      <div class="ft-bot-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Charity Registration</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── PAGE NAVIGATION ── */
+function nav(page, linkEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
+  if (target) target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // update active nav link
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if (linkEl) linkEl.classList.add('active');
+  // re-run reveal
+  setTimeout(initReveal, 80);
+}
+
+/* ── MOBILE MENU ── */
+function mobToggle() {
+  document.getElementById('mobMenu').classList.toggle('open');
+  document.getElementById('mobOverlay').classList.toggle('show');
+  document.getElementById('hbg').classList.toggle('open');
+}
+
+/* ── SCROLL EVENTS ── */
+window.addEventListener('scroll', () => {
+  // navbar shrink
+  document.getElementById('navbar').classList.toggle('shrink', window.scrollY > 50);
+  // back to top
+  document.getElementById('back-top').classList.toggle('show', window.scrollY > 300);
+});
+
+/* ── REVEAL ON SCROLL ── */
+function initReveal() {
+  const els = document.querySelectorAll('.r:not(.v), .rl:not(.v), .rr:not(.v)');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+}
+initReveal();
+
+/* ── COUNTERS ── */
+function startCounters() {
+  document.querySelectorAll('.stat-n[data-target]').forEach(el => {
+    const target = +el.dataset.target;
+    let cur = 0;
+    const step = target / 80;
+    const t = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      el.textContent = Math.floor(cur).toLocaleString();
+      if (cur >= target) clearInterval(t);
+    }, 20);
+  });
+}
+const statsSec = document.querySelector('.stats');
+if (statsSec) {
+  new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { startCounters(); }
+  }, { threshold: 0.3 }).observe(statsSec);
+}
+
+/* ── FAQ ── */
+function faqToggle(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
+  if (!isOpen) { btn.classList.add('open'); ans.classList.add('open'); }
+}
+
+/* ── FORM ── */
+function submitForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('formBtn');
+  btn.textContent = '✓ Sent! JazakAllahu Khayran';
+  btn.style.background = 'var(--gold)';
+  btn.style.color = 'var(--emerald)';
+  setTimeout(() => {
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> &nbsp;Send Message';
+    btn.style.background = '';
+    btn.style.color = '';
+    e.target.reset();
+  }, 3500);
+}
+
+/* ── LOADER ── */
+window.addEventListener('load', () => {
+  setTimeout(() => { document.getElementById('loader').classList.add('hidden'); }, 1000);
+});
+</script>
+</body>
+</html>
